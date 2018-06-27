@@ -10,16 +10,12 @@
                 app
         >
             <v-list>
-                <v-list-tile
-                        value="true"
-                        v-for="(item, i) in items"
-                        :key="i"
-                >
+                <v-list-tile v-for="item in items" :key="item.title" :to="{name: item.name}" :exact="true">
                     <v-list-tile-action>
-                        <v-icon v-html="item.icon"/>
+                        <v-icon medium>{{ item.icon }}</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                        <v-list-tile-title v-text="item.title"/>
+                        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
             </v-list>
@@ -57,12 +53,14 @@
                 drawer: true,
                 fixed: false,
                 items: [{
-                    icon: 'bubble_chart',
-                    title: 'Home'
+                    icon: 'home',
+                    title: 'Home',
+                    name: 'Main'
                 },
                 {
-                    icon: 'bubble_chart',
-                    title: 'Dashboard'
+                    icon: 'web',
+                    title: 'Dashboard',
+                    name: 'Dashboard'
                 }],
                 miniVariant: false,
                 title: 'Data Visualisation '
