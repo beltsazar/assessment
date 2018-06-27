@@ -7,7 +7,7 @@
           <span class="subheading">This site contains visualisation of data using al kinds of dashboards.</span>
           <v-divider class="my-3"></v-divider>
           <div class="title mb-3">Check out this dashboard!</div>
-          <v-btn large color="primary" class="mx-0">Go there</v-btn>
+          <v-btn large color="primary" class="mx-0" :to="{name: 'Dashboard'}">Go there</v-btn>
         </v-flex>
       </v-layout>
     </v-container>

@@ -1,10 +1,53 @@
 <template>
-    <v-container fluid>
-        <v-slide-y-transition mode="out-in">
-            <v-layout column align-center>
-                <canvas id="myChart" xwidth="400" xheight="400"></canvas>
-            </v-layout>
-        </v-slide-y-transition>
+    <v-container :grid-list-sm="$vuetify.breakpoint.xsOnly" :grid-list-lg="$vuetify.breakpoint.smAndUp" fluid>
+        <v-layout wrap>
+            <v-flex xs12>
+                <v-card>
+                    <v-card-title primary-title>
+                        <h1 class="headline">Population and Jobs in the United States</h1>
+                    </v-card-title>
+                    <v-card-text>
+                        <v-layout wrap>
+                            <v-flex xs12 md6>
+                                <v-select
+                                        :items="items"
+                                        v-model="select"
+                                        :hint="`${select.state}, ${select.abbr}`"
+                                        label="Select"
+                                        single-line
+                                        item-text="state"
+                                        item-value="abbr"
+                                        return-object
+                                        persistent-hint
+                                />
+                            </v-flex>
+                        </v-layout>
+                    </v-card-text>
+                </v-card>
+            </v-flex>
+            <v-flex xs12 md6>
+                <v-card>
+                    <v-card-title primary-title>
+                        <h1 class="headline">Population of {{select.state}}</h1>
+                    </v-card-title>
+                    <v-card-text>
+                        <canvas id="myChart"></canvas>
+                    </v-card-text>
+                </v-card>
+            </v-flex>
+            <v-flex xs12 md6>
+                <v-card>
+                    <v-card-title primary-title>
+                        <h1 class="headline">Jobs in {{select.state}}</h1>
+                    </v-card-title>
+                    <v-card-text>
+                        blavatski!!!
+                    </v-card-text>
+                </v-card>
+            </v-flex>
+        </v-layout>
+
+
     </v-container>
 </template>
 
@@ -14,24 +57,18 @@
     export default {
         data () {
             return {
-                clipped: false,
-                drawer: true,
-                fixed: false,
-                items: [{
-                    icon: 'bubble_chart',
-                    title: 'Home'
-                },
-                {
-                    icon: 'bubble_chart',
-                    title: 'Dashboard'
-                }],
-                miniVariant: false,
-                title: 'Data Visualisation '
+                select: { state: 'Florida', abbr: 'FL' },
+                items: [
+                    { state: 'Florida', abbr: 'FL' },
+                    { state: 'Georgia', abbr: 'GA' },
+                    { state: 'Nebraska', abbr: 'NE' },
+                    { state: 'California', abbr: 'CA' },
+                    { state: 'New York', abbr: 'NY' }
+                ]
             }
         },
-        name: 'App',
-        methods: {
-        },
+        name: 'Dashboard',
+        methods: {},
         mounted: function () {
             const ctx = document.getElementById('myChart')
 
