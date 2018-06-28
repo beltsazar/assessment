@@ -20,6 +20,7 @@
                                         return-object
                                         persistent-hint
                                 />
+                                {{data}}
                             </v-flex>
                         </v-layout>
                     </v-card-text>
@@ -46,15 +47,15 @@
                 </v-card>
             </v-flex>
         </v-layout>
-
-
     </v-container>
 </template>
 
 <script>
+    import {mapState} from 'vuex'
     import Chart from 'chart.js'
 
     export default {
+        name: 'Dashboard',
         data () {
             return {
                 select: { state: 'Florida', abbr: 'FL' },
@@ -67,7 +68,9 @@
                 ]
             }
         },
-        name: 'Dashboard',
+        computed: mapState({
+            data: 'data'
+        }),
         methods: {},
         mounted: function () {
             const ctx = document.getElementById('myChart')

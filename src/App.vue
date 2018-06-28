@@ -2,8 +2,6 @@
     <v-app dark>
         <v-navigation-drawer
                 persistent
-                :mini-variant="miniVariant"
-                :clipped="clipped"
                 v-model="drawer"
                 enable-resize-watcher
                 fixed
@@ -22,15 +20,8 @@
         </v-navigation-drawer>
         <v-toolbar
                 app
-                :clipped-left="clipped"
         >
             <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
-            <!--<v-btn icon @click.stop="miniVariant = !miniVariant">-->
-                <!--<v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"/>-->
-            <!--</v-btn>-->
-            <!--<v-btn icon @click.stop="clipped = !clipped">-->
-                <!--<v-icon>web</v-icon>-->
-            <!--</v-btn>-->
             <v-toolbar-title v-text="title"/>
         </v-toolbar>
         <v-content>
@@ -49,7 +40,6 @@
     export default {
         data () {
             return {
-                clipped: false,
                 drawer: true,
                 fixed: false,
                 items: [{
@@ -62,7 +52,6 @@
                     title: 'Dashboard',
                     name: 'Dashboard'
                 }],
-                miniVariant: false,
                 title: 'Data Visualisation '
             }
         },
@@ -70,7 +59,7 @@
         methods: {
             loadData: async function () {
                 const response = await axios.get('/data/states/')
-                console.log(response)
+                this.$store.commit('data/states', {...response.data})
             }
         },
         mounted: function () {
