@@ -5,7 +5,18 @@ export default {
     state: {
         states: {},
         population: {},
-        jobs: {}
+        jobs: []
+    },
+    getters: {
+        getStatesUIList: (state) => {
+            return Object.entries(state.states).map((item) => ({abbr: item[0], name: item[1]}))
+        },
+        getPopulationByStateId: (state) => (id) => ({
+            labels: state.population.labels,
+            data: state.population.data.filter((item) => {
+                return (item[0] === id)
+            })
+        })
     },
     mutations: {
         states (state, payload) {
@@ -15,7 +26,7 @@ export default {
             state.population = {...payload}
         },
         jobs (state, payload) {
-            state.jobs = {...payload}
+            state.jobs = [...payload]
         }
     },
     actions: {
@@ -29,8 +40,7 @@ export default {
 
                 commit('states', {...response[0].data})
                 commit('population', {...response[1].data})
-                commit('jobs', {...response[2].data})
-
+                commit('jobs', [...response[2].data])
                 resolve()
             })
         }

@@ -10,17 +10,16 @@
                         <v-layout wrap>
                             <v-flex xs12 md6>
                                 <v-select
-                                        :items="items"
+                                        :items="statesUIList"
                                         v-model="select"
-                                        :hint="`${select.state}, ${select.abbr}`"
+                                        :hint="`${select.name}, ${select.abbr}`"
                                         label="Select"
                                         single-line
-                                        item-text="state"
+                                        item-text="name"
                                         item-value="abbr"
                                         return-object
                                         persistent-hint
                                 />
-                                {{data}}
                             </v-flex>
                         </v-layout>
                     </v-card-text>
@@ -29,9 +28,10 @@
             <v-flex xs12 md6>
                 <v-card>
                     <v-card-title primary-title>
-                        <h1 class="headline">Population of {{select.state}}</h1>
+                        <h1 class="headline">Population of {{select.name}}</h1>
                     </v-card-title>
                     <v-card-text>
+                        {{populationChartData}}
                         <canvas id="myChart"></canvas>
                     </v-card-text>
                 </v-card>
@@ -39,7 +39,7 @@
             <v-flex xs12 md6>
                 <v-card>
                     <v-card-title primary-title>
-                        <h1 class="headline">Jobs in {{select.state}}</h1>
+                        <h1 class="headline">Jobs in {{select.name}}</h1>
                     </v-card-title>
                     <v-card-text>
                         blavatski!!!
@@ -51,28 +51,35 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex'
+    import {mapState, mapGetters} from 'vuex'
     import Chart from 'chart.js'
 
     export default {
         name: 'Dashboard',
         data () {
             return {
-                select: { state: 'Florida', abbr: 'FL' },
-                items: [
-                    { state: 'Florida', abbr: 'FL' },
-                    { state: 'Georgia', abbr: 'GA' },
-                    { state: 'Nebraska', abbr: 'NE' },
-                    { state: 'California', abbr: 'CA' },
-                    { state: 'New York', abbr: 'NY' }
-                ]
+                select: {},
+                populationChartData: {}
             }
         },
-        computed: mapState({
-            data: 'data'
-        }),
+        computed: {
+            ...mapState({
+                data: 'data'
+            }),
+            ...mapGetters({
+                statesUIList: 'data/getStatesUIList',
+                getPopulationByStateId: 'data/getPopulationByStateId'
+            })
+        },
         methods: {},
+        watch: {
+            select (selection) {
+                this.populationChartData = this.getPopulationByStateId(selection.abbr)
+            }
+        },
         mounted: function () {
+            this.select = this.statesUIList[0]
+
             const ctx = document.getElementById('myChart')
 
             /* eslint-disable no-new */
@@ -90,7 +97,7 @@
                         '65 Years and Over'
                     ],
                     datasets: [{
-                        label: '# of Votes',
+                        label: 'Population',
                         data: [
                             'AL',
                             310504,

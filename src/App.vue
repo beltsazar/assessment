@@ -24,9 +24,8 @@
             <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
             <v-toolbar-title v-text="title"/>
         </v-toolbar>
-        <v-content>
+        <v-content v-if="dataLoaded">
             <router-view/>
-
         </v-content>
         <v-footer :fixed="fixed" app>
             <span>&copy; 2018 - Daniel Marcuse</span>
@@ -35,8 +34,6 @@
 </template>
 
 <script>
-    import axios from 'axios'
-
     export default {
         data () {
             return {
@@ -52,13 +49,15 @@
                     title: 'Dashboard',
                     name: 'Dashboard'
                 }],
-                title: 'Data Visualisation '
+                title: 'Data Visualisation',
+                dataLoaded: false
             }
         },
         name: 'App',
         methods: {},
         mounted: async function () {
             await this.$store.dispatch('data/loadData')
+            this.dataLoaded = true
         }
     }
 </script>
