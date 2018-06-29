@@ -54,6 +54,16 @@ router.get('/population', (req, res) => res.json({
                 407205
             ],
             [
+                "AS",   // Added missing data!
+                202070,
+                343207,
+                157204,
+                264160,
+                754420,
+                727124,
+                407205
+            ],
+            [
                 "CA",
                 2704659,
                 4499890,
@@ -591,7 +601,6 @@ router.get('/states', (req, res) => res.json(
     })
 )
 
-
 router.get('/jobs', (req, res) => res.json([
         {
             "name": "AL",
@@ -601,6 +610,24 @@ router.get('/jobs', (req, res) => res.json([
             "trade": 0.0,
             "domestic service": 0.0,
             "professional service": 0.0
+        },
+        {
+            "name": "AK",
+            "agriculture": 20.0,
+            "manufacturing": 20.0,
+            "mining": 2.0,
+            "trade": 16.0,
+            "domestic service": 20.0,
+            "professional service": 5.0
+        },
+        {
+            "name": "AS",
+            "agriculture": 35.0,
+            "manufacturing": 20.0,
+            "mining": 0.0,
+            "trade": 10.0,
+            "domestic service": 15.0,
+            "professional service": 3.0
         },
         {
             "name": "AZ",

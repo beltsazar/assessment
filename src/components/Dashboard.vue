@@ -31,7 +31,7 @@
                         <h1 class="headline">Population of {{select.name}}</h1>
                     </v-card-title>
                     <v-card-text>
-                        <bar-chart :label="select.name" :dataset="populationChartData" />
+                        <bar-chart :dataset="populationChartData" />
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -41,7 +41,7 @@
                         <h1 class="headline">Jobs in {{select.name}}</h1>
                     </v-card-title>
                     <v-card-text>
-                        blavatski!!!
+                        <bar-chart :dataset="jobsChartData" />
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -59,7 +59,7 @@
             return {
                 select: {},
                 populationChartData: {},
-                test: 'joepie!'
+                jobsChartData: {}
             }
         },
         computed: {
@@ -68,7 +68,8 @@
             }),
             ...mapGetters({
                 statesUIList: 'data/getStatesUIList',
-                getPopulationByStateId: 'data/getPopulationByStateId'
+                getPopulationByStateId: 'data/getPopulationByStateId',
+                getJobsByStateId: 'data/getJobsByStateId'
             })
         },
         components: {
@@ -80,6 +81,10 @@
                 this.populationChartData = {
                     label: this.select.name,
                     ...this.getPopulationByStateId(selection.abbr)
+                }
+                this.jobsChartData = {
+                    label: this.select.name,
+                    ...this.getJobsByStateId(selection.abbr)
                 }
             }
         },

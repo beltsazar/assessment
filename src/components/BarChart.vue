@@ -1,11 +1,9 @@
 <template>
-    <canvas id="myChart"></canvas>
+    <canvas></canvas>
 </template>
 
 <script>
     import Chart from 'chart.js'
-
-    let chart
 
     export default {
         name: 'BarChart',
@@ -19,14 +17,14 @@
         },
         watch: {
             dataset (data) {
-                chart.data.labels = []
-                chart.data.datasets = []
+                this.chart.data.labels = []
+                this.chart.data.datasets = []
 
                 data.labels.map(label => {
-                    chart.data.labels.push(label)
+                    this.chart.data.labels.push(label)
                 })
 
-                chart.data.datasets.push({
+                this.chart.data.datasets.push({
                     label: data.label,
                     data: data.data,
                     backgroundColor: [
@@ -38,12 +36,12 @@
                     borderWidth: 1
                 })
 
-                chart.update()
+                this.chart.update()
             }
         },
         methods: {},
         mounted: function () {
-            chart = new Chart(this.$el, {
+            this.chart = new Chart(this.$el, {
                 type: 'bar',
                 data: {},
                 options: {

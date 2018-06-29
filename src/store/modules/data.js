@@ -13,10 +13,24 @@ export default {
         },
         getPopulationByStateId: (state) => (id) => ({
             labels: state.population.labels.slice(1),
-            data: state.population.data.filter((item) => {
+            data: state.population.data.find((item) => {
                 return (item[0] === id)
-            })[0].slice(1)
-        })
+            }).slice(1)
+        }),
+        getJobsByStateId: (state) => (id) => {
+            const job = state.jobs.find((item) => {
+                return (item.name === id)
+            })
+
+            return {
+                labels: Object.entries(job).map(item => {
+                    return item[0]
+                }).slice(1),
+                data: Object.entries(job).map(item => {
+                    return item[1]
+                }).slice(1)
+            }
+        }
     },
     mutations: {
         states (state, payload) {
