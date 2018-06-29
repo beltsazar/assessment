@@ -25,23 +25,33 @@
                     </v-card-text>
                 </v-card>
             </v-flex>
-            <v-flex xs12 md6>
+            <v-flex xs12>
                 <v-card>
                     <v-card-title primary-title>
                         <h1 class="headline">Population of {{select.name}}</h1>
                     </v-card-title>
                     <v-card-text>
-                        <bar-chart :dataset="populationChartData" />
+                        <v-layout wrap>
+                            <v-flex xs12>
+                                <bar-chart :dataset="populationChartData"/>
+                            </v-flex>
+                            <v-flex xs12 md6>
+                                <radar-chart :dataset="populationChartData"/>
+                            </v-flex>
+                            <v-flex xs12 md6>
+                                <pie-chart :dataset="populationChartData"/>
+                            </v-flex>
+                        </v-layout>
                     </v-card-text>
                 </v-card>
             </v-flex>
-            <v-flex xs12 md6>
+            <v-flex xs12>
                 <v-card>
                     <v-card-title primary-title>
                         <h1 class="headline">Jobs in {{select.name}}</h1>
                     </v-card-title>
                     <v-card-text>
-                        <bar-chart :dataset="jobsChartData" />
+                        <bar-chart :dataset="jobsChartData"/>
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -52,6 +62,8 @@
 <script>
     import {mapState, mapGetters} from 'vuex'
     import BarChart from '@/components/BarChart'
+    import RadarChart from '@/components/RadarChart'
+    import PieChart from '@/components/PieChart'
 
     export default {
         name: 'Dashboard',
@@ -73,7 +85,9 @@
             })
         },
         components: {
-            'bar-chart': BarChart
+            'bar-chart': BarChart,
+            'radar-chart': RadarChart,
+            'pie-chart': PieChart
         },
         methods: {},
         watch: {

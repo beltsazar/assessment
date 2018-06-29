@@ -6,7 +6,7 @@
     import Chart from 'chart.js'
 
     export default {
-        name: 'BarChart',
+        name: 'RadarChart',
         props: [
             'dataset'
         ],
@@ -28,10 +28,10 @@
                     label: data.label,
                     data: data.data,
                     backgroundColor: [
-                        'rgba(54, 162, 235, 0.4)'
+                        'rgba(255, 206, 86, 0.5)'
                     ],
                     borderColor: [
-                        'rgba(54, 162, 235, 1)'
+                        'rgba(255, 206, 86, 0.8)'
                     ],
                     borderWidth: 2
                 })
@@ -42,17 +42,9 @@
         methods: {},
         mounted: function () {
             this.chart = new Chart(this.$el, {
-                type: 'bar',
+                type: 'radar',
                 data: {},
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
+                options: {}
             })
         }
     }
