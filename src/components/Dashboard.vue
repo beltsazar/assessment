@@ -26,34 +26,72 @@
                 </v-card>
             </v-flex>
             <v-flex xs12>
-                <v-card>
-                    <v-card-title primary-title>
-                        <h1 class="headline">Population of {{select.name}}</h1>
-                    </v-card-title>
-                    <v-card-text>
-                        <v-layout wrap>
-                            <v-flex xs12>
+                <v-layout wrap>
+                    <v-flex xs12>
+                        <v-card>
+                            <v-card-title primary-title>
+                                <h1 class="headline">Population of {{select.name}} in bars</h1>
+                            </v-card-title>
+                            <v-card-text>
                                 <bar-chart :dataset="populationChartData"/>
-                            </v-flex>
-                            <v-flex xs12 md6>
-                                <radar-chart :dataset="populationChartData"/>
-                            </v-flex>
-                            <v-flex xs12 md6>
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
+                    <v-flex xs12 md6>
+                        <v-card>
+                            <v-card-title primary-title>
+                                <h1 class="headline">Population of {{select.name}} in a dougnut</h1>
+                            </v-card-title>
+                            <v-card-text>
                                 <pie-chart :dataset="populationChartData"/>
-                            </v-flex>
-                        </v-layout>
-                    </v-card-text>
-                </v-card>
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
+                    <v-flex xs12 md6>
+                        <v-card>
+                            <v-card-title primary-title>
+                                <h1 class="headline">Population of {{select.name}} in a radar</h1>
+                            </v-card-title>
+                            <v-card-text>
+                                <radar-chart :dataset="populationChartData"/>
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
             </v-flex>
             <v-flex xs12>
-                <v-card>
-                    <v-card-title primary-title>
-                        <h1 class="headline">Jobs in {{select.name}}</h1>
-                    </v-card-title>
-                    <v-card-text>
-                        <bar-chart :dataset="jobsChartData"/>
-                    </v-card-text>
-                </v-card>
+                <v-layout wrap>
+                    <v-flex xs12>
+                        <v-card>
+                            <v-card-title primary-title>
+                                <h1 class="headline">Jobs in {{select.name}} in bars</h1>
+                            </v-card-title>
+                            <v-card-text>
+                                <bar-chart :dataset="jobsChartData"/>
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
+                    <v-flex xs12 md6>
+                        <v-card>
+                            <v-card-title primary-title>
+                                <h1 class="headline">Jobs in {{select.name}} in a dougnut</h1>
+                            </v-card-title>
+                            <v-card-text>
+                                <pie-chart :dataset="jobsChartData"/>
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
+                    <v-flex xs12 md6>
+                        <v-card>
+                            <v-card-title primary-title>
+                                <h1 class="headline">Jobs in {{select.name}} in a radar</h1>
+                            </v-card-title>
+                            <v-card-text>
+                                <radar-chart :dataset="jobsChartData"/>
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
             </v-flex>
         </v-layout>
     </v-container>
