@@ -58,8 +58,9 @@
         name: 'App',
         methods: {
             loadData: async function () {
-                const response = await axios.get('/data/states/')
-                this.$store.commit('data/states', {...response.data})
+                // const response = await axios.get('/data/states/')
+                // this.$store.commit('data/states', {...response.data})
+                this.$store.dispatch('data/loadData')
             }
         },
         mounted: function () {

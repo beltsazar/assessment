@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default {
     namespaced: true,
     state: {
@@ -14,6 +16,19 @@ export default {
         },
         jobs (state, payload) {
             state.jobs = {...payload}
+        }
+    },
+    actions: {
+        async loadData ({ commit }) {
+            const response = await axios.all([
+                axios.get('/data/states/'),
+                axios.get('/data/population/'),
+                axios.get('/data/jobs/')
+            ])
+
+            commit('states', {...response[0].data})
+            commit('population', {...response[1].data})
+            commit('jobs', {...response[2].data})
         }
     }
 }
