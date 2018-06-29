@@ -8,8 +8,14 @@
 # install dependencies
 npm install
 
+# start app together with mock server
+npm run start
+
 # serve with hot reload at localhost:8080
 npm run dev
+
+# run mockserver at localhost:3000
+npm run mockserver
 
 # build for production with minification
 npm run build
