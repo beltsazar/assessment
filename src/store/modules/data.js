@@ -19,16 +19,20 @@ export default {
         }
     },
     actions: {
-        async loadData ({ commit }) {
-            const response = await axios.all([
-                axios.get('/data/states/'),
-                axios.get('/data/population/'),
-                axios.get('/data/jobs/')
-            ])
+        async loadData ({commit}) {
+            return new Promise(async function (resolve, reject) {
+                const response = await axios.all([
+                    axios.get('/data/states/'),
+                    axios.get('/data/population/'),
+                    axios.get('/data/jobs/')
+                ])
 
-            commit('states', {...response[0].data})
-            commit('population', {...response[1].data})
-            commit('jobs', {...response[2].data})
+                commit('states', {...response[0].data})
+                commit('population', {...response[1].data})
+                commit('jobs', {...response[2].data})
+
+                resolve()
+            })
         }
     }
 }
