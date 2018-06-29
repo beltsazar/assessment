@@ -15,7 +15,7 @@ router.get('/population', (req, res) => res.json({
         "data": [
             [
                 "AL",
-                310504,
+                1215966, //310504 See some actual visual change!!!
                 552339,
                 259034,
                 450818,

@@ -31,8 +31,7 @@
                         <h1 class="headline">Population of {{select.name}}</h1>
                     </v-card-title>
                     <v-card-text>
-                        {{populationChartData}}
-                        <canvas id="myChart"></canvas>
+                        <bar-chart :label="select.name" :dataset="populationChartData" />
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -52,14 +51,15 @@
 
 <script>
     import {mapState, mapGetters} from 'vuex'
-    import Chart from 'chart.js'
+    import BarChart from '@/components/BarChart'
 
     export default {
         name: 'Dashboard',
         data () {
             return {
                 select: {},
-                populationChartData: {}
+                populationChartData: {},
+                test: 'joepie!'
             }
         },
         computed: {
@@ -71,73 +71,20 @@
                 getPopulationByStateId: 'data/getPopulationByStateId'
             })
         },
+        components: {
+            'bar-chart': BarChart
+        },
         methods: {},
         watch: {
             select (selection) {
-                this.populationChartData = this.getPopulationByStateId(selection.abbr)
+                this.populationChartData = {
+                    label: this.select.name,
+                    ...this.getPopulationByStateId(selection.abbr)
+                }
             }
         },
         mounted: function () {
             this.select = this.statesUIList[0]
-
-            const ctx = document.getElementById('myChart')
-
-            /* eslint-disable no-new */
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: [
-                        'State',
-                        'Under 5 Years',
-                        '5 to 13 Years',
-                        '14 to 17 Years',
-                        '18 to 24 Years',
-                        '25 to 44 Years',
-                        '45 to 64 Years',
-                        '65 Years and Over'
-                    ],
-                    datasets: [{
-                        label: 'Population',
-                        data: [
-                            'AL',
-                            310504,
-                            552339,
-                            259034,
-                            450818,
-                            1231572,
-                            1215966,
-                            641667
-                        ],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }
-                    ]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            })
         }
     }
 </script>

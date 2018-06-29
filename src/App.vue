@@ -34,20 +34,17 @@
 </template>
 
 <script>
+    import Chart from 'chart.js'
+
     export default {
         data () {
             return {
                 drawer: true,
                 fixed: false,
                 items: [{
-                    icon: 'home',
-                    title: 'Home',
-                    name: 'Main'
-                },
-                {
-                    icon: 'web',
-                    title: 'Dashboard',
-                    name: 'Dashboard'
+                    icon: 'home', title: 'Home', name: 'Main'
+                }, {
+                    icon: 'web', title: 'Dashboard', name: 'Dashboard'
                 }],
                 title: 'Data Visualisation',
                 dataLoaded: false
@@ -56,6 +53,16 @@
         name: 'App',
         methods: {},
         mounted: async function () {
+            /**
+             * Set some ChartJS defaults
+             */
+            Chart.defaults.global.elements.rectangle.backgroundColor = 'rgba(54, 162, 235, 0.4)'
+            Chart.defaults.global.elements.rectangle.borderColor = 'rgba(54, 162, 235, 1)'
+            Chart.defaults.global.elements.rectangle.borderWidth = 2
+
+            /**
+             * Load data from store
+             */
             await this.$store.dispatch('data/loadData')
             this.dataLoaded = true
         }

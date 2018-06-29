@@ -12,10 +12,10 @@ export default {
             return Object.entries(state.states).map((item) => ({abbr: item[0], name: item[1]}))
         },
         getPopulationByStateId: (state) => (id) => ({
-            labels: state.population.labels,
+            labels: state.population.labels.slice(1),
             data: state.population.data.filter((item) => {
                 return (item[0] === id)
-            })
+            })[0].slice(1)
         })
     },
     mutations: {
@@ -37,7 +37,6 @@ export default {
                     axios.get('/data/population/'),
                     axios.get('/data/jobs/')
                 ])
-
                 commit('states', {...response[0].data})
                 commit('population', {...response[1].data})
                 commit('jobs', [...response[2].data])
