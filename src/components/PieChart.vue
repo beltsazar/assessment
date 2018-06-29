@@ -8,6 +8,7 @@
     export default {
         name: 'PieChart',
         props: [
+            'type',
             'dataset'
         ],
         data () {
@@ -54,7 +55,7 @@
         methods: {},
         mounted: function () {
             this.chart = new Chart(this.$el, {
-                type: 'doughnut',
+                type: this.type,
                 data: {},
                 options: {}
             })

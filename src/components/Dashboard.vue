@@ -43,7 +43,7 @@
                                 <h1 class="headline">Population of {{select.name}} in a dougnut</h1>
                             </v-card-title>
                             <v-card-text>
-                                <pie-chart :dataset="populationChartData"/>
+                                <pie-chart type="doughnut" :dataset="populationChartData"/>
                             </v-card-text>
                         </v-card>
                     </v-flex>
@@ -77,7 +77,7 @@
                                 <h1 class="headline">Jobs in {{select.name}} in a dougnut</h1>
                             </v-card-title>
                             <v-card-text>
-                                <pie-chart :dataset="jobsChartData"/>
+                                <pie-chart type="doughnut" :dataset="jobsChartData"/>
                             </v-card-text>
                         </v-card>
                     </v-flex>
